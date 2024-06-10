@@ -114,6 +114,11 @@ const btn = style({
   padding: '1rem',
 });
 
+const img = style({
+  objectFit: 'cover',
+  objectPosition: 'bottom',
+});
+
 export const appSt = {
   bottomBtn,
   container,
@@ -127,4 +132,5 @@ export const appSt = {
   collapseArrow,
   btnContainer,
   btn,
+  img,
 };

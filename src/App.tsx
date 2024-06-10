@@ -51,7 +51,7 @@ export const App = () => {
     <>
       <div className={appSt.container}>
         <div className={appSt.card}>
-          <img src={p1} height={184} width="100%" alt="монетки" />
+          <img src={p1} height={184} width="100%" alt="монетки" className={appSt.img} />
           <Typography.TitleResponsive style={{ maxWidth: 288 }} font="system" tag="h1" view="medium" weight="bold">
             Гарантированный кредитный лимит
           </Typography.TitleResponsive>
