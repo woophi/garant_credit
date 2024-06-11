@@ -9,8 +9,8 @@ import { useState } from 'react';
 import p1 from './assets/p1.png';
 import { appSt } from './style.css';
 
-const min = 30_000;
-const max = 5_000_000;
+const min = 0;
+const max = 1_600_000;
 const step = 1000;
 const range: SliderInputProps['range'] = {
   min: [min],
@@ -34,7 +34,7 @@ function calculatePayment(principal: number, interestRate: number, term: number)
 }
 
 export const App = () => {
-  const [value, setValue] = useState<number | string>(1_000_000);
+  const [value, setValue] = useState<number | string>(30_000);
   const [expanded, setExpanded] = useState(false);
 
   const handleInputChange: SliderInputProps['onInputChange'] = (_, { value }) => {
@@ -86,7 +86,7 @@ export const App = () => {
           sliderClassName={appSt.slid}
         />
 
-        {numberValue <= 2_000_000 ? (
+        {numberValue <= 700_000 ? (
           <div className={appSt.plate({ ss: 'g' })}>
             <Typography.Text tag="p" view="primary-small" defaultMargins={false}>
               Оформим за 2 минуты
@@ -95,7 +95,7 @@ export const App = () => {
           </div>
         ) : null}
 
-        {numberValue > 2_000_000 ? (
+        {numberValue > 700_000 ? (
           <div className={appSt.plate({ ss: 'y' })}>
             <Typography.Text tag="p" view="primary-small" defaultMargins={false}>
               Только под залог недвижимости
