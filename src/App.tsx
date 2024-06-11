@@ -54,7 +54,7 @@ export const App = () => {
     setExpanded(!expanded);
   };
 
-  const monthlyPayment = calculatePayment(numberValue, 0.36, 60).toFixed(0);
+  const monthlyPayment = calculatePayment(numberValue, numberValue > 700_000 ? 0.21 : 0.36, 60).toFixed(0);
   return (
     <>
       <div className={appSt.container}>
@@ -169,7 +169,7 @@ export const App = () => {
             <div className={appSt.btnContainer}>
               <div>
                 <Typography.TitleResponsive font="system" tag="h2" view="xsmall" weight="bold">
-                  16%
+                  {numberValue > 700_000 ? '16%' : '17%'}
                 </Typography.TitleResponsive>
                 <Typography.Text style={{ color: '#A1A1A1' }} tag="p" view="primary-medium" defaultMargins={false}>
                   Ставка
