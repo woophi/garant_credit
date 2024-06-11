@@ -9,7 +9,7 @@ import { useState } from 'react';
 import p1 from './assets/p1.png';
 import { appSt } from './style.css';
 
-const min = 0;
+const min = 30_000;
 const max = 1_600_000;
 const step = 1000;
 const range: SliderInputProps['range'] = {
@@ -34,7 +34,7 @@ function calculatePayment(principal: number, interestRate: number, term: number)
 }
 
 export const App = () => {
-  const [value, setValue] = useState<number | string>(30_000);
+  const [value, setValue] = useState<number | string>(min);
   const [expanded, setExpanded] = useState(false);
 
   const handleInputChange: SliderInputProps['onInputChange'] = (_, { value }) => {
