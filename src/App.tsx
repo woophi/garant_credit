@@ -26,6 +26,13 @@ const pips: SliderInputProps['pips'] = {
   },
 };
 
+function calculatePayment(principal: number, interestRate: number, term: number) {
+  const monthlyInterestRate = interestRate / 12;
+  const exponent = Math.pow(1 + monthlyInterestRate, term);
+
+  return (principal * monthlyInterestRate * exponent) / (exponent - 1);
+}
+
 export const App = () => {
   const [value, setValue] = useState<number | string>(1_000_000);
   const [expanded, setExpanded] = useState(false);
@@ -47,6 +54,7 @@ export const App = () => {
     setExpanded(!expanded);
   };
 
+  const monthlyPayment = calculatePayment(numberValue, 0.36, 60).toFixed(0);
   return (
     <>
       <div className={appSt.container}>
@@ -75,6 +83,7 @@ export const App = () => {
           size={56}
           rightAddons="₽"
           fieldClassName={appSt.slider}
+          sliderClassName={appSt.slid}
         />
 
         {numberValue <= 2_000_000 ? (
@@ -150,7 +159,7 @@ export const App = () => {
           <div className={appSt.btnContainer}>
             <div>
               <Typography.TitleResponsive font="system" tag="h2" view="xsmall" weight="bold">
-                29 700 ₽
+                {Number(monthlyPayment).toLocaleString('ru')} ₽
               </Typography.TitleResponsive>
               <Typography.Text style={{ color: '#A1A1A1' }} tag="p" view="primary-medium" defaultMargins={false}>
                 Платеж в месяц
@@ -160,7 +169,7 @@ export const App = () => {
             <div className={appSt.btnContainer}>
               <div>
                 <Typography.TitleResponsive font="system" tag="h2" view="xsmall" weight="bold">
-                  13,5%
+                  16%
                 </Typography.TitleResponsive>
                 <Typography.Text style={{ color: '#A1A1A1' }} tag="p" view="primary-medium" defaultMargins={false}>
                   Ставка
