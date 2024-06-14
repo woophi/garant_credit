@@ -155,7 +155,12 @@ export const App = () => {
       </div>
       <Gap size={96} />
       <div className={appSt.bottomBtn}>
-        <ButtonMobile block view="primary" className={appSt.btn}>
+        <ButtonMobile
+          block
+          view="primary"
+          className={appSt.btn}
+          href="alfabank://webFeature?type=recommendation&url=https%3A%2F%2Fclick.alfabank.ru%2Fmobile-offers%2Fweb%2FPIL%2Fcredits%2FCH?isWebView=true"
+        >
           <div className={appSt.btnContainer}>
             <div>
               <Typography.TitleResponsive font="system" tag="h2" view="xsmall" weight="bold">
