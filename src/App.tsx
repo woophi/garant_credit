@@ -98,7 +98,7 @@ export const App = () => {
         {numberValue > 700_000 ? (
           <div className={appSt.plate({ ss: 'y' })}>
             <Typography.Text tag="p" view="primary-small" defaultMargins={false}>
-              Только под залог недвижимости
+              Под залог недвижимости (парковка, гараж, коммерческая, квартира)
             </Typography.Text>
             <StatusBadge view="positive-checkmark" className={appSt.plateIcon({ ss: 'y' })} />
           </div>
