@@ -40,14 +40,14 @@ export const App = () => {
   const [expanded, setExpanded] = useState(false);
 
   const handleInputChange: SliderInputProps['onInputChange'] = (_, { value }) => {
-    setValue(typeof value === 'string' ? Number(value.replace(/ /g, '')) : value);
+    setValue(typeof value === 'string' ? Number(value.replace(/\s+/g, '')) : value);
   };
 
   const handleSliderChange: SliderInputProps['onSliderChange'] = ({ value }) => {
     setValue(value);
   };
 
-  const numberValue = typeof value === 'string' ? Number(value.replace(/ /g, '')) : value;
+  const numberValue = typeof value === 'string' ? Number(value.replace(/\s+/g, '')) : value;
   const handleBlur = () => {
     setValue(Math.max(min, Math.min(max, numberValue)));
   };
