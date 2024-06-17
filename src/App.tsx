@@ -10,8 +10,8 @@ import p1 from './assets/p1.png';
 import { appSt } from './style.css';
 
 const min = 30_000;
-const max = 1_600_000;
-const step = 1000;
+const max = 1_300_000;
+const step = 10000;
 const range: SliderInputProps['range'] = {
   min: [min],
   max: [max],
@@ -32,6 +32,8 @@ function calculatePayment(principal: number, interestRate: number, term: number)
 
   return (principal * monthlyInterestRate * exponent) / (exponent - 1);
 }
+
+const fromKPZN = 500_000;
 
 export const App = () => {
   const [value, setValue] = useState<number | string>(min);
@@ -54,7 +56,7 @@ export const App = () => {
     setExpanded(!expanded);
   };
 
-  const monthlyPayment = calculatePayment(numberValue, numberValue > 700_000 ? 0.21 : 0.36, 60).toFixed(0);
+  const monthlyPayment = calculatePayment(numberValue, numberValue > fromKPZN ? 0.24 : 0.4, 60).toFixed(0);
   return (
     <>
       <div className={appSt.container}>
@@ -86,7 +88,7 @@ export const App = () => {
           sliderClassName={appSt.slid}
         />
 
-        {numberValue <= 700_000 ? (
+        {numberValue < fromKPZN ? (
           <div className={appSt.plate({ ss: 'g' })}>
             <Typography.Text tag="p" view="primary-small" defaultMargins={false}>
               Оформим за 2 минуты
@@ -95,7 +97,7 @@ export const App = () => {
           </div>
         ) : null}
 
-        {numberValue > 700_000 ? (
+        {numberValue >= fromKPZN ? (
           <div className={appSt.plate({ ss: 'y' })}>
             <Typography.Text tag="p" view="primary-small" defaultMargins={false}>
               Под залог недвижимости (парковка, гараж, коммерческая, квартира)
@@ -174,7 +176,7 @@ export const App = () => {
             <div className={appSt.btnContainer}>
               <div>
                 <Typography.TitleResponsive font="system" tag="h2" view="xsmall" weight="bold">
-                  {numberValue > 700_000 ? '16%' : '17%'}
+                  {numberValue > fromKPZN ? '19%' : '21%'}
                 </Typography.TitleResponsive>
                 <Typography.Text style={{ color: '#A1A1A1' }} tag="p" view="primary-medium" defaultMargins={false}>
                   Ставка
