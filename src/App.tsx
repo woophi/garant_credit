@@ -88,7 +88,7 @@ export const App = () => {
           sliderClassName={appSt.slid}
         />
 
-        {numberValue < fromKPZN ? (
+        {numberValue <= fromKPZN ? (
           <div className={appSt.plate({ ss: 'g' })}>
             <Typography.Text tag="p" view="primary-small" defaultMargins={false}>
               Оформим за 2 минуты
@@ -97,7 +97,7 @@ export const App = () => {
           </div>
         ) : null}
 
-        {numberValue >= fromKPZN ? (
+        {numberValue > fromKPZN ? (
           <div className={appSt.plate({ ss: 'y' })}>
             <Typography.Text tag="p" view="primary-small" defaultMargins={false}>
               Под залог недвижимости (парковка, гараж, коммерческая, квартира)
