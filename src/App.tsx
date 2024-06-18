@@ -5,9 +5,10 @@ import { Gap } from '@alfalab/core-components/gap';
 import { SliderInput, SliderInputProps } from '@alfalab/core-components/slider-input';
 import { StatusBadge } from '@alfalab/core-components/status-badge';
 import { Typography } from '@alfalab/core-components/typography';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import p1 from './assets/p1.png';
 import { appSt } from './style.css';
+import { sendDataToGA } from './utils/events';
 
 const min = 30_000;
 const max = 1_300_000;
@@ -36,6 +37,7 @@ function calculatePayment(principal: number, interestRate: number, term: number)
 const fromKPZN = 500_000;
 
 export const App = () => {
+  const [loading, setLoading] = useState(false);
   const [value, setValue] = useState<number | string>(min);
   const [expanded, setExpanded] = useState(false);
 
@@ -55,6 +57,16 @@ export const App = () => {
   const handleToggle = () => {
     setExpanded(!expanded);
   };
+
+  const submit = useCallback(() => {
+    setLoading(true);
+    sendDataToGA(numberValue).then(() => {
+      setLoading(false);
+
+      (window.location as unknown as string) =
+        'alfabank://webFeature?type=recommendation&url=https%3A%2F%2Fclick.alfabank.ru%2Fmobile-offers%2Fweb%2FPIL%2Fcredits%2FCH?isWebView=true';
+    });
+  }, [numberValue]);
 
   const monthlyPayment = calculatePayment(numberValue, numberValue > fromKPZN ? 0.24 : 0.4, 60).toFixed(0);
   return (
@@ -157,12 +169,7 @@ export const App = () => {
       </div>
       <Gap size={96} />
       <div className={appSt.bottomBtn}>
-        <ButtonMobile
-          block
-          view="primary"
-          className={appSt.btn}
-          href="alfabank://webFeature?type=recommendation&url=https%3A%2F%2Fclick.alfabank.ru%2Fmobile-offers%2Fweb%2FPIL%2Fcredits%2FCH?isWebView=true"
-        >
+        <ButtonMobile block view="primary" className={appSt.btn} onClick={submit} loading={loading}>
           <div className={appSt.btnContainer}>
             <div>
               <Typography.TitleResponsive font="system" tag="h2" view="xsmall" weight="bold">
