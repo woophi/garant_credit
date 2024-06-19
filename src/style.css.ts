@@ -52,7 +52,9 @@ const plate = recipe({
   },
 });
 const plateIcon = recipe({
-  base: {},
+  base: {
+    flexShrink: 0,
+  },
   variants: {
     ss: {
       g: {
